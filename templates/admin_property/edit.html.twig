@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block title %}Edition{% endblock title %}
+{% block body %}
+    <div class="container">
+        <h2>Editer</h2>
+        {{ include('form.html.twig', {button:'Editer'} )}}
+    </div>
+{% endblock body %}
