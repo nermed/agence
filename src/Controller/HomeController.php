@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Property;
 use App\Repository\PropertyRepository;
-use Doctrine\ORM\EntityManager;
+//use Doctrine\ORM\EntityManager;
 //use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,7 +26,7 @@ class HomeController extends AbstractController
         $this->repository = $repository;
     }
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="/")
      */
     public function index() : Response
     {

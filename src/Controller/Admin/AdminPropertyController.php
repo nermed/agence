@@ -1,16 +1,17 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Property;
 use App\Form\PropertyType;
-use Symfony\Component\HttpFoundation\Request;
+use App\Service\FileUploader;
 //use Doctrine\ORM\EntityManager;
 use App\Repository\PropertyRepository;
 use Doctrine\ORM\EntityManagerInterface;
 //use Symfony\Component\BrowserKit\Request;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class AdminPropertyController extends AbstractController
@@ -73,11 +74,14 @@ class AdminPropertyController extends AbstractController
      * @param Property $property
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function edit(Property $property, Request $request)
+    public function edit(Property $property, Request $request, FileUploader $fileUploader)
     {
         $form = $this->createForm(PropertyType::class, $property);
         $form ->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
+            $file = $property->getImageFile();
+            $fileName = $fileUploader->upload($file);
+            $property->setFilename($fileName);
             $this->em->flush();
             $this->addFlash('success', 'Modifié avec succes');
             return $this->redirectToRoute('admin.property.index');

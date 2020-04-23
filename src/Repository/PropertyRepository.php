@@ -2,10 +2,12 @@
 
 namespace App\Repository;
 
+use Doctrine\ORM\Query;
 use App\Entity\Property;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Persistence\ManagerRegistry;
+use App\Entity\PropertySearch;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Property|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,13 +22,30 @@ class PropertyRepository extends ServiceEntityRepository
         parent::__construct($registry, Property::class);
     }
     /**
-     * @return Property
+     * @return Query
      */
-    public function findAllVisible(): array
+    public function findAllVisibleQuery(PropertySearch $search): Query
     {
-        return $this->findAllQuery()
-                    ->getQuery()
-                    ->getResult();
+        $query = $this->findAllQuery();
+        if($search -> getMaxPrice()){
+            $query = $query->andWhere('p.price <= :maxprice')
+                            ->setParameter('maxprice', $search->getMaxPrice());
+        }
+        if($search -> getMinSurface()){
+            $query = $query->andWhere('p.surface >= :minsurface')
+                            ->setParameter('minsurface', $search->getMinSurface());
+        }
+        if($search->getOptions()->count() > 0)
+        {
+            $k = 0;
+            foreach($search->getOptions() as $option){
+                $k++;
+                $query= $query->andWhere(":option$k MEMBER OF p.options")
+                                ->setParameter("option$k", $option);
+            }
+        }
+
+        return $query->getQuery();
     }
     /**
     *@return Property

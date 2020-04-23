@@ -15,7 +15,7 @@
                             <h5 class="card-title">
                                 <a href="{{ path('property.show', {id: property.id, slug: property.slug}) }}"> {{ property.title }} </a>
                             </h5>
-                            <p class="card-text"> {{ property.city }} ({{ property.adresseCode }}) </p>
+                            <p class="card-text">{{ property.surface }}m², {{ property.adresse }}, {{ property.city }}</p>
                             <div class="text-primary"> {{ property.formattedPrice }} Fbu</div>
                         </div>
                     </div>

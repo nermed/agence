@@ -7,6 +7,12 @@
         "ext-iconv": "*",
         "cocur/slugify": "^4.0",
         "easycorp/easyadmin-bundle": "^2.3",
+        "fzaninotto/faker": "^1.9",
+        "google/auth": "^1.8",
+        "google/recaptcha": "^1.2",
+        "knplabs/knp-paginator-bundle": "^5.1",
+        "liip/imagine-bundle": "^2.3",
+        "psr/http-message": "^1.0",
         "sensio/framework-extra-bundle": "^5.1",
         "symfony/asset": "5.0.*",
         "symfony/console": "5.0.*",
@@ -29,9 +35,13 @@
         "symfony/twig-pack": "*",
         "symfony/validator": "5.0.*",
         "symfony/web-link": "5.0.*",
-        "symfony/yaml": "5.0.*"
+        "symfony/webpack-encore-bundle": "^1.7",
+        "symfony/yaml": "5.0.*",
+        "vich/uploader-bundle": "^1.13",
+        "zircote/swagger-php": "^3.0"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.3",
         "symfony/debug-pack": "*",
         "symfony/maker-bundle": "^1.14",
         "symfony/profiler-pack": "*",

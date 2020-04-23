@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Option{% endblock %}
+
+{% block body %}
+<div class="jumbotron text-center">
+    <h1>Create new Option</h1>
+</div>
+    <div class="container">
+        {{ include('option/_form.html.twig') }}
+        <a href="{{ path('option_index') }}" class="btn btn-primary">Back to list</a>
+    </div>
+{% endblock %}
